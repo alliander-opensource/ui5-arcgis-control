@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta charset="UTF-8">
+		<title>Arcgis Maps</title>
+		
+		<!--UI5 Bootstrap-->
+		<script id="sap-ui-bootstrap"
+		    src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js"
+		    data-sap-ui-libs="sap.m"
+		    data-sap-ui-xx-bindingSyntax="complex"
+		    data-sap-ui-preload="async"
+		    data-sap-ui-resourceroots='{"ArcgisDemo": "./"}'>
+		</script>
+		
+		<!--Load the arcgis resources-->
+		<link rel="stylesheet" href="https://js.arcgis.com/3.21/esri/css/esri.css">
+		<script type="text/javascript" src="https://js.arcgis.com/3.21"></script>
+		
+		<!--Initiate the demo app-->
+		<script type="text/javascript">
+		    sap.ui.getCore().attachInit(function () {
+		    	sap.ui.getCore().loadLibrary("Arcgis", jQuery.sap.getModulePath("ArcgisDemo") + "/../Arcgis");
+		        new Arcgis.Map().placeAt("content");
+		    });
+		</script>
+		
+	</head>
+	<body class="sapUiBody" id="content"></body>
+</html>
