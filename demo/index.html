@@ -21,9 +21,22 @@
 		
 		<!--Initiate the demo app-->
 		<script type="text/javascript">
-		    sap.ui.getCore().attachInit(function () {
-		    	sap.ui.getCore().loadLibrary("Arcgis", jQuery.sap.getModulePath("ArcgisDemo") + "/../Arcgis");
-		        new Arcgis.Map().placeAt("content");
+		    sap.ui.getCore().attachInit(function() {
+				var oCompContainer = new sap.ui.core.ComponentContainer({
+					height : "100%"
+				});
+				var oShell = new sap.m.Shell({
+					app: oCompContainer,
+					appWidthLimited : false
+				});
+				var oComponent = sap.ui.component({
+					name: "ArcgisDemo",
+					manifestFirst: true,
+					async: true
+			 	}).then(function(oComponent){
+			 		oShell.placeAt("content");
+		 			oCompContainer.setComponent(oComponent);
+			 	});
 		    });
 		</script>
 		

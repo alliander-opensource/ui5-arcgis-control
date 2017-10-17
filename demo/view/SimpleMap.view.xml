@@ -1,0 +1,5 @@
+<core:View controllerName="ArcgisDemo.controller.SimpleMap" displayBlock="true" height="100%" xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Page>
+		<Arcgis:Map xmlns:Arcgis="Arcgis"></Arcgis:Map>
+	</Page>
+</core:View>

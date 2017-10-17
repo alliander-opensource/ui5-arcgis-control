@@ -1,0 +1,62 @@
+{
+	"_version": "1.0.0",
+	"sap.app": {
+		"_version": "1.0.0",
+		"id": "ArcgisDemo",
+		"type": "application",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+        "dataSources": {
+        },
+		"ach": "CA-UI5-DOC"
+	},
+	"sap.ui": {
+		"_version": "1.1.0",
+		"technology": "UI5",
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_belize"
+		]
+	},
+	"sap.ui5": {
+		"_version": "1.1.0",
+		"rootView": "ArcgisDemo.view.App",
+		"dependencies": {
+			"minUI5Version": "1.30",
+			"libs": {
+				"sap.m": {}
+			}
+		},
+		"models": {
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "ArcgisDemo.view",
+				"controlId": "ArcgisDemoApp",
+				"controlAggregation": "pages",
+				"transition": "slide"
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "SimpleMap",
+					"target": "SimpleMap"
+				}
+			],
+			"targets": {
+				"SimpleMap": {
+					"viewName": "SimpleMap"
+				}
+			}
+		}
+	}
+}
