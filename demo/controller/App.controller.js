@@ -1,13 +1,22 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function(Controller) {
+	"ArcgisDemo/controller/BaseController"
+], function(BaseController) {
 	"use strict";
 
-	return Controller.extend("ArcgisDemo.controller.App", {
+	return BaseController.extend("ArcgisDemo.controller.App", {
 		
 		onInit: function() {
 	        
+		},
+		
+		goToSimpleMap: function() {
+			this.getRouter().navTo("SimpleMap");
+		},
+		
+		goToButtons: function() {
+			this.getRouter().navTo("Buttons");
 		}
+		
 	});
 
 });

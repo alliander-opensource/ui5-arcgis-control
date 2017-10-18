@@ -50,11 +50,19 @@
 					"pattern": "",
 					"name": "SimpleMap",
 					"target": "SimpleMap"
+				},
+				{
+					"pattern": "buttons",
+					"name": "Buttons",
+					"target": "Buttons"
 				}
 			],
 			"targets": {
 				"SimpleMap": {
 					"viewName": "SimpleMap"
+				},
+				"Buttons": {
+					"viewName": "Buttons"
 				}
 			}
 		}

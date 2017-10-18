@@ -3,7 +3,7 @@ sap.ui.define([
 ], function(BaseController) {
 	"use strict";
 
-	return BaseController.extend("ArcgisDemo.controller.SimpleMap", {
+	return BaseController.extend("ArcgisDemo.controller.Buttons", {
 		
 		onInit: function() {
 	        

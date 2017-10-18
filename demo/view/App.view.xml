@@ -1,3 +1,10 @@
 <core:View controllerName="ArcgisDemo.controller.App" displayBlock="true" height="100%" xmlns:core="sap.ui.core" xmlns="sap.m">
-	<App id="ArcgisDemoApp"></App>
+	<Page>
+		<headerContent>
+			<core:Fragment fragmentName="ArcgisDemo.fragment.Menu" type="XML" />
+		</headerContent>
+		<content>
+			<App id="ArcgisDemoApp"></App>
+		</content>
+	</Page>
 </core:View>

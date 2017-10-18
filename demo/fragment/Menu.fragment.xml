@@ -1,0 +1,6 @@
+<SegmentedButton xmlns="sap.m">
+	<items>
+		<SegmentedButtonItem text="Simple Map" press="goToSimpleMap"></SegmentedButtonItem>
+		<SegmentedButtonItem text="Map with buttons" press="goToButtons"></SegmentedButtonItem>
+	</items>
+</SegmentedButton>
