@@ -15,6 +15,10 @@ sap.ui.define([
 		
 		goToButtons: function() {
 			this.getRouter().navTo("Buttons");
+		},
+		
+		goToLayers: function() {
+			this.getRouter().navTo("Layers");
 		}
 		
 	});

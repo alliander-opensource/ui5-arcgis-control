@@ -55,6 +55,11 @@
 					"pattern": "buttons",
 					"name": "Buttons",
 					"target": "Buttons"
+				},
+				{
+					"pattern": "layers",
+					"name": "Layers",
+					"target": "Layers"
 				}
 			],
 			"targets": {
@@ -63,6 +68,9 @@
 				},
 				"Buttons": {
 					"viewName": "Buttons"
+				},
+				"Layers": {
+					"viewName": "Layers"
 				}
 			}
 		}
