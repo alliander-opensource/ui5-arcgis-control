@@ -2,6 +2,6 @@
 	<Arcgis:Map id="map" xmlns:Arcgis="Arcgis">
 		<Button icon="sap-icon://weather-proofing" type="Emphasized" press="addLayerWeather1"></Button>
 		<Button icon="sap-icon://arrow-bottom" press="addLayerWeather2" type="Accept"></Button>
-		<Button icon="sap-icon://cancel" type="Reject"></Button>
+		<Button icon="sap-icon://map" type="Reject" press="findLocation"></Button>
 	</Arcgis:Map>
 </core:View>

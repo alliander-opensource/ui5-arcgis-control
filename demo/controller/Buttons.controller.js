@@ -1,7 +1,10 @@
 sap.ui.define([
 	"ArcgisDemo/controller/BaseController",
-	"sap/m/MessageBox"
-], function(BaseController, MessageBox) {
+	"sap/m/MessageBox",
+	"sap/m/Dialog",
+	"sap/m/Input",
+	"sap/m/Button"
+], function(BaseController, MessageBox, Dialog, Input, Button) {
 	"use strict";
 
 	return BaseController.extend("ArcgisDemo.controller.Buttons", {
@@ -69,6 +72,85 @@ sap.ui.define([
 					oArcgisMap.addLayer(oFeatureLayer);
 				
 			});
+		},
+		
+		findLocation: function() {
+			// Get the map object from the custom control
+			var oArcgisMap = this.getView().byId("map").arcgismap;
+			
+			var dialog = new Dialog({
+				title: 'Enter an address or location',
+				type: 'Message',
+				content: [
+					new Input('input', {
+						width: '100%',
+						placeholder: 'Location?'
+					})
+				],
+				beginButton: new Button({
+					text: 'Submit',
+					press: function () {
+						var sText = sap.ui.getCore().byId('input').getValue();
+						$.getJSON("https://geodata.nationaalgeoregister.nl/locatieserver/v3/free?q=" + sText)
+						.then(function(oResult) {
+							if (oResult.response && oResult.response.docs && oResult.response.docs.length > 0) {
+								var sLocRD = oResult.response.docs[0].centroide_rd;
+								var rdX = Number(sLocRD.substring("POINT(".length, sLocRD.indexOf(" ")));
+								var rdY = Number(sLocRD.substring(sLocRD.indexOf(" ") + 1, sLocRD.indexOf(")")));
+								
+								require([
+									"esri/symbols/PictureMarkerSymbol",
+									"esri/symbols/Font",
+									"esri/Color",
+									"esri/layers/GraphicsLayer",
+									"esri/graphic",
+									"esri/geometry/Point",
+									"esri/SpatialReference",
+									"esri/symbols/TextSymbol"
+								], function(PictureMarkerSymbol, Font, Color, GraphicsLayer, Graphic, Point, SpatialReference, TextSymbol) {
+									var graphic = new Graphic({
+										geometry: new Point(rdX, rdY, new SpatialReference({
+											wkid: 28992
+										}))
+									});
+									graphic.symbol = new TextSymbol({
+										text: "", // sap-icon://map
+										font: new Font({
+											family: "SAP-icons",
+											size: 16
+										}),
+										color: new Color("#346187")
+									});
+									var graphicsLayer = null;
+									if (!oArcgisMap.getLayer("location")) {
+										graphicsLayer = new GraphicsLayer({
+											id: "location"
+										});
+									} else {
+										graphicsLayer = oArcgisMap.getLayer("location");
+									}
+									graphicsLayer.clear();
+									graphicsLayer.add(graphic);
+									oArcgisMap.addLayer(graphicsLayer);
+								});
+								
+							}
+							console.log(oResult);
+						});
+						dialog.close();
+					}
+				}),
+				endButton: new Button({
+					text: 'Cancel',
+					press: function () {
+						dialog.close();
+					}
+				}),
+				afterClose: function() {
+					dialog.destroy();
+				}
+			});
+			dialog.open();
 		}
 		
 	});
