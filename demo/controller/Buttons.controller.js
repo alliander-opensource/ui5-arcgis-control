@@ -39,10 +39,34 @@ sap.ui.define([
 			
 			var weatherLayer = "https://services.arcgisonline.nl/arcgis/rest/services/Weer/Actuele_weersinformatie/MapServer";
 			
-			require(["esri/layers/FeatureLayer"], function(FeatureLayer) {
-				
-				// Add a layer to the basemap
-				oArcgisMap.addLayer(new FeatureLayer(weatherLayer + "/1"));
+			require([
+				"esri/layers/FeatureLayer",
+				"esri/tasks/query",
+				"esri/tasks/QueryTask",
+				"esri/geometry/Extent",
+				"esri/SpatialReference"
+				], function(FeatureLayer, Query, QueryTask, Extent, SpatialReference) {
+					
+					// Add a layer to the basemap
+					var oFeatureLayer = new FeatureLayer(weatherLayer + "/1");
+						
+					oFeatureLayer.on("click", function(oEvent) {
+						var oQuery = new Query();
+						var oQueryTask = new QueryTask(oFeatureLayer.url);
+						var oExtent = new Extent(oEvent.mapPoint.x - 10000, oEvent.mapPoint.y - 10000, oEvent.mapPoint.x + 10000, oEvent.mapPoint.y + 10000, new SpatialReference({wkid: 28992}));
+						oQuery.geometry = oExtent;
+						oQuery.outFields = ["*"];
+						oQueryTask.on("complete", function (oResult){
+							console.log(oResult);
+							if (oResult && oResult.featureSet && oResult.featureSet.features && oResult.featureSet.features.length > 0) {
+								var sWindSpeedBF = oResult.featureSet.features[0].attributes.windsnelheidBF;
+								MessageBox.alert("Wind speed is " + sWindSpeedBF + " beaufort.");
+							}
+						});
+						oQueryTask.execute(oQuery);
+					});
+					
+					oArcgisMap.addLayer(oFeatureLayer);
 				
 			});
 		}
